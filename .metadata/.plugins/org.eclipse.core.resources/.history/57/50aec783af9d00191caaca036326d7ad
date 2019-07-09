@@ -1,0 +1,53 @@
+import java.io.FileInputStream;
+
+public class classBOARD {
+
+	private String a[]=new String[100];
+	
+	public classBOARD() {
+		fGetNumbers();
+	}
+	
+	public void fDisplay(String _count,String[] col1,String[] col2) {
+		int i=0;
+		boolean bMatch=false;
+		String s_a,s_b;
+			
+		do {
+			i++;
+			System.out.printf("[%s] %s = %s\n",i,col1[i-1],col2[i-1]);
+			s_a=a[i-1].trim();
+			s_b=_count.trim();
+			System.out.printf("%s %s \n",s_a,s_b);
+			bMatch = s_a.equals(s_b);
+			if(bMatch) {
+				System.out.println("FOUND");
+			}
+		}while (!bMatch);
+	}
+	
+	private void fGetNumbers() {
+		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0,l=0,s=0;    
+	      	 String sLine=null;
+	          for(int i=1;i<=1000;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	        		 sLine=sLine+(char)r;  	        		  			
+	        	  }
+	        	  l=sLine.length();
+	        	  s=6;
+	        	  sLine=sLine.substring(s, l);
+	        	      bDone=true;
+	        	  a[i-1]=sLine;
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+
+			
+	}
+}

@@ -1,0 +1,69 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class HTable {
+	public static void main(String [] args) {
+		Scanner input = new Scanner(System.in);
+		Random rnd1=new Random();
+		storeName myname = new storeName("Hanif");
+		storeColumn col1 =  new storeColumn("A",1);
+		storeFile file1 =  new storeFile("data.txt");
+		storeResult result1 =  new storeResult(0,0);
+		classMENU mymenu =  new classMENU();
+		classBOARD myboard =  new classBOARD();
+				
+		int nLetter;
+		String sLetter;
+		int nAnswer;
+		String sReply;
+		boolean bFound = false;
+		int mnTest,mnItem;
+		
+		myname.Saying();
+		//initvar
+		mnItem=1;
+		myboard.setMode(1);
+		do {
+			mymenu.fDisplay();
+			nAnswer=mymenu.fProcess();
+			switch(nAnswer) {
+			case 1:
+				mnTest=1;
+				col1.fView("TEST1");
+				myboard.setMode(1);
+				break;
+			case 2:
+				mnTest=2;
+				col1.fView("TEST2");
+				myboard.setMode(2);
+				break;
+			case 3:
+				mnTest=3;
+				col1.fView("TEST3");
+				myboard.setMode(3);
+				break;
+			case 4:
+				mnTest=4;
+				col1.fView("TEST4");
+				myboard.setMode(4);
+				break;
+			case 5:
+				mnTest=5;
+				col1.fView("TEST5");
+				myboard.setMode(5);
+				break;
+			case 6:
+				myboard.fDisplay();
+				break;
+			case 7:
+				break;
+			case 8:
+				result1.View();
+				break;
+			default:
+				bFound=true;
+				break;
+			}
+		} while (bFound==false);
+	}
+}

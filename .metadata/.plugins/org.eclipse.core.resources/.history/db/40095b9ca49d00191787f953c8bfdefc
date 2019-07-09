@@ -1,0 +1,100 @@
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+
+public class ReadFile {
+	private String path;
+	private String a[]=new String[1000];
+	private String _count;
+	private String col1[] = new String[1000];
+	private String col2[] = new String[1000];
+	
+	public String getCount() {
+		return _count;
+	}
+	
+	public String[] getCol1() {
+		return col1;
+	}
+
+	public String[] getCol2() {
+		return col2;
+	}
+	
+	public ReadFile(String file_path) {
+		path = file_path;
+		fGetNumbers();
+	}
+	
+	public String[] OpenFile() throws IOException{
+		FileReader fr = new FileReader(path);
+		BufferedReader textreader = new BufferedReader(fr);
+		
+		String nLines=readLines();
+		String textData[] = new String[1000];
+		
+		_count=nLines;
+		
+		int i=0;
+		
+		do {
+			i++;
+			textData[i-1]=textreader.readLine();
+			System.out.printf("%s %s ",a[i-1],nLines);
+		} while (a[i-1]!=nLines);
+		col1=textData;
+		
+		i=0;
+		
+		do {
+			i++;
+			textData[i-1]=textreader.readLine();
+		} while (a[i-1]!=nLines);
+		col2=textData;
+		
+		textreader.close();
+		
+		return textData;
+	}
+
+	String readLines() throws IOException{
+	
+		FileReader fr = new FileReader(path);
+		BufferedReader textreader = new BufferedReader(fr);
+	
+		String aLine;
+		
+		aLine=textreader.readLine();
+		System.out.println(aLine);
+		aLine=textreader.readLine();
+		System.out.println(aLine);
+		
+		return aLine;
+	}
+	
+	private void fGetNumbers() {
+		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0,l=0,s=0;    
+	      	 String sLine=null;
+	          for(int i=1;i<=1000;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	        		 sLine=sLine+(char)r;  	        		  			
+	        	  }
+	        	  l=sLine.length();
+	        	  s=6;
+	        	  sLine=sLine.substring(s, l);
+	        	      bDone=true;
+	        	  a[i-1]=sLine;
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+
+			
+	}
+}

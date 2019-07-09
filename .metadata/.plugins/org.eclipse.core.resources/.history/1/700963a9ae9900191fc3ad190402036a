@@ -1,0 +1,101 @@
+import java.io.FileInputStream;  
+
+public class classFILE {
+private int _mode;
+private String _count;
+private String a[]=new String[1000];
+
+	public void setMode(int value) {
+		_mode = value;
+		fGetNumbers();
+	}
+
+	public int getMode() {
+		return _mode;
+	}
+	
+	private void fGetNumbers() {
+		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0;    
+	    	  String sLine=null;
+	          for(int i=1;i<=1000;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	    		    sLine=sLine+(char)r;  
+	    		    if(bDone==false) {
+	    		    	if(r>=65) {
+	    		    		
+				        	System.out.println((char)r);
+	    		    	}
+	    		    	else {
+				        	System.out.println(r);
+	    		    		
+	    		    	}
+	    		    	
+	    		    }
+	        	  }
+	        	  if(bDone==false) {
+	    		         	System.out.println(sLine);
+	    		    	
+	    		    }
+	        	  bDone=true;
+	        	  a[i-1]=sLine;
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+
+			
+	}
+	public void fDisplay() {
+		String sFilename="C:/A_OldPowersourceServer/file"+_mode+"beta.txt";
+		boolean bFound=false;
+		boolean bLine=false;
+		String sLine;
+		String sFirst;
+		
+        try{    
+          FileInputStream fin=new FileInputStream(sFilename);    
+     	  int r=0;    
+    	  sLine=null;
+          while((r=fin.read())!=13){
+    		    sLine=sLine+(char)r;                  			  
+          }
+          while((r=fin.read())!=13){
+  		    sLine=sLine+(char)r;                  			  
+        }
+          while((r=fin.read())!=13){
+    		    sLine=sLine+(char)r;                  			  
+          }
+          while((r=fin.read())!=13){
+    		    sLine=sLine+(char)r;                  			  
+          }
+          while((r=fin.read())!=13){
+    		    sLine=sLine+(char)r;                  			  
+          }
+          setCount(sLine);
+          System.out.println("Count="+_count);
+          int i=0;
+	      do {
+	    	  i++;
+	    	  sLine=null;
+	    	  while((r=fin.read())!=13){
+	    		  sLine=sLine+(char)r;                  			  
+	    	 }
+	    	  System.out.println(sLine);
+	      }while (a[i-1]!=_count);
+             
+          fin.close();    
+        }catch(Exception e){System.out.println(e);}    
+          
+
+	}
+	
+	private void setCount(String value) {
+		_count=value;
+	}
+}
+	

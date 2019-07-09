@@ -1,0 +1,13 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class apples {
+	public static void main(String [] args) {
+		Scanner input = new Scanner(System.in);
+		Random rnd1=new Random();
+		tuna myname = new tuna("Hanif");
+	
+		myname.Saying();
+		
+	}
+}

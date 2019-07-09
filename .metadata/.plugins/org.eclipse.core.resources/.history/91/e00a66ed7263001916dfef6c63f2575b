@@ -1,0 +1,17 @@
+
+public class column {
+private String _letter;
+	
+	public column(String value) {
+		_letter = value;
+	}
+	
+	public void setLetter(String text) {
+		_letter = text;
+	}
+	
+	public String getLetter() {
+		return _letter;
+	}
+
+}

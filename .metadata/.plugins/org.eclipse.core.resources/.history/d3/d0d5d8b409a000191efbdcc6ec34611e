@@ -1,0 +1,151 @@
+import java.util.Scanner;
+import java.util.Random;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class HTable {
+		
+	public static void main(String [] args) {
+		Scanner input = new Scanner(System.in);
+		Random rnd1=new Random();
+		storeName myname = new storeName("Hanif");
+		storeFile file1 =  new storeFile("data.txt");
+		storeResult result1 =  new storeResult(0,0);
+		classMENU mymenu =  new classMENU();
+		String a[]=new String[100];
+
+		int _mode=1;
+		String file_name="C:/A_OldPowersourceServer/file"+_mode+".rtf";
+		classBOARD myboard =  new classBOARD();
+		storeColumn column1 =  new storeColumn("A",1);
+			
+		String _countshort="1";
+		String _countlong="1";
+		String col1[] = new String[100];
+		String col2[] = new String[100];
+		String col3[] = new String[100];
+		boolean _TransliterationOn = false;
+		boolean _LongVersion = false;
+		
+		int nLetter;
+		String sLetter;
+		int nAnswer;
+		String sReply;
+		boolean bFound = false;
+		int mnTest,mnItem;
+		
+		//GetNumbers
+		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0,l=0,s=0;    
+	      	 String sLine=null;
+       	  while((r=fin.read())!=13){
+       		 sLine=sLine+(char)r;  	        		  			
+       	  }
+	          for(int i=1;i<=100;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	        		 sLine=sLine+(char)r;  	        		  			
+	        	  }
+	        	  l=sLine.length();
+	        	  s=5;
+	        	  sLine=sLine.substring(s, l);
+	        	      bDone=true;
+	        	  a[i-1]=sLine;
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+		  // ---
+		  
+		String _count;
+		
+		myname.Saying();
+		do {
+			mymenu.fDisplay();
+			nAnswer=mymenu.fProcess();
+			if(nAnswer<=5) {
+				_mode = nAnswer;
+				file_name="C:/A_OldPowersourceServer/file"+_mode+".rtf";
+				
+				column1.fView("TEST"+_mode);
+				
+				try {
+					ReadFile file =  new ReadFile(file_name);
+					String[] aryLines;
+
+					file.setMode(_mode);
+					file.setTransliterationOn(_TransliterationOn);
+					file.setLongVersion(_LongVersion);
+					aryLines=(file.OpenFile());
+					_countshort = file.getCount1();
+					_countlong = file.getCount2();
+					if(_LongVersion==false) {
+						_count = _countshort;
+					}
+					else {
+						_count = _countlong;
+					}
+					int i=0;
+					boolean bMatch=false;
+					do {
+						i++;
+						col1[i-1] = file.getCol1(i);						
+						bMatch = a[i-1].equals(_count);
+					} while (!bMatch);
+				
+					i=0;
+					bMatch=false;
+					do {
+						i++;
+						col2[i-1] = file.getCol2(i);						
+						bMatch = a[i-1].equals(_count);
+					}while (!bMatch);
+				
+				}
+				catch(IOException e){
+					System.out.println(e.getMessage());
+				}
+								
+			}
+			else {		
+				switch(nAnswer) {
+				case 6:
+					if(_LongVersion==false) {
+						_count = _countshort;
+					}
+					else {
+						_count = _countlong;
+					}
+
+					int i=0;
+					boolean bMatch=false;
+						
+					do {
+						i++;
+						if(_TransliterationOn==false) {
+							System.out.printf("[%s] %s = %s = %s\n",i,col1[i-1],col2[i-1],col3[i-1]);								
+						}
+						else {
+							System.out.printf("[%s] %s = %s\n",i,col2[i-1],col3[i-1]);
+						}
+						bMatch = a[i-1].equals(_count);
+					}while (!bMatch);
+					break;
+				case 7:
+					break;
+				case 8:
+					result1.View();
+					break;
+				default:
+					bFound=true;
+					break;
+				}
+			}
+		} while (bFound==false);
+	}
+	
+	
+}

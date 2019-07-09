@@ -1,0 +1,17 @@
+
+public class column {setLetter
+private String[] _letter = new String[10];
+	
+	public column(String value,int index) {
+		_letter[index-1] = value;
+	}
+	
+	public void setLetter(String text,int index) {
+		_letter[index-1] = text;
+	}
+	
+	public String getLetter(int index) {
+		return _letter[index-1];
+	}
+
+}

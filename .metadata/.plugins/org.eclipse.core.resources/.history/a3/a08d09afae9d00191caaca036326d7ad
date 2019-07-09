@@ -1,0 +1,146 @@
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+
+public class ReadFile {
+	private String path;
+	private int _mode;
+	private String a[]=new String[100];
+	private String b[]=new String[5];
+	private String _count;
+	private String col1[] = new String[100];
+	private String col2[] = new String[100];
+	
+	public String getCount() {
+		return _count;
+	}
+	
+	public void setMode(int value) {
+		_mode = value;
+	}
+
+	public String[] getCol1() {
+		return col1;
+	}
+
+	public String[] getCol2() {
+		return col2;
+	}
+	
+	public ReadFile(String file_path) {
+		path = file_path;
+		fGetNumbers();
+	}
+	
+	public String[] OpenFile() throws IOException{
+		FileReader fr = new FileReader(path);
+		BufferedReader textreader = new BufferedReader(fr);
+		
+		String nLines=readLines();
+		String textData[] = new String[100];
+		
+		_count=nLines;
+		
+		int i=0;
+		boolean bMatch=false;
+		String s_a,s_b;
+		String sLine;
+
+		sLine=textreader.readLine();
+		sLine=textreader.readLine();
+		sLine=textreader.readLine();
+		sLine=textreader.readLine();
+		
+		do {
+			i++;
+			textData[i-1]=textreader.readLine();
+			s_a=a[i-1].trim();
+			s_b=nLines.trim();
+			System.out.printf("%s %s \n",s_a,s_b);
+			System.out.printf("%s %s \n",i,textData[i-1]);
+			bMatch = s_a.equals(s_b);
+			if(bMatch) {
+				System.out.println("FOUND");
+			}
+			col1[i-1]=textData[i-1];
+		} while (!bMatch);
+		
+		i=0;
+		bMatch=false;
+
+		do {
+			i++;
+			textData[i-1]=textreader.readLine();
+			s_a=a[i-1].trim();
+			s_b=nLines.trim();
+			System.out.printf("%s %s ",s_a,s_b);
+			bMatch = s_a.equals(s_b);
+			if(bMatch) {
+				System.out.println("FOUND");
+			}
+			col2[i-1]=textData[i-1];
+		} while (!bMatch);
+		
+		textreader.close();
+		
+		return textData;
+	}
+
+	String readLines(){
+	
+		String sFilename="C:/A_OldPowersourceServer/numbers2.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0,l=0,s=0;    
+	      	 String sLine=null;
+	       	  while((r=fin.read())!=13){
+	       		 sLine=sLine+(char)r;  	        		  			
+	       	  }
+	          for(int i=1;i<=5;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	        		 sLine=sLine+(char)r;  	        		  			
+	        	  }
+	        	  l=sLine.length();
+	        	  s=5;
+	        	  sLine=sLine.substring(s, l);
+	        	      bDone=true;
+	        	  b[i-1]=sLine;
+	        	  System.out.println(b[i-1]);
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+		return b[_mode-1];
+}
+	
+	private void fGetNumbers() {
+		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
+		boolean bDone=false;
+		  try{    
+	          FileInputStream fin=new FileInputStream(sFilename);    
+	     	  int r=0,l=0,s=0;    
+	      	 String sLine=null;
+       	  while((r=fin.read())!=13){
+       		 sLine=sLine+(char)r;  	        		  			
+       	  }
+	          for(int i=1;i<=100;i++) {
+	        	  sLine=null;
+	        	  while((r=fin.read())!=13){
+	        		 sLine=sLine+(char)r;  	        		  			
+	        	  }
+	        	  l=sLine.length();
+	        	  s=5;
+	        	  sLine=sLine.substring(s, l);
+	        	      bDone=true;
+	        	  a[i-1]=sLine;
+	          }
+	          fin.close();    
+	        }catch(Exception e){System.out.println(e);}    
+	          
+
+			
+	}
+}

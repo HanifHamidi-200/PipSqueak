@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class classMENU {
+	public void fDisplay() {
+		String sText;
+		
+		System.out.println("======================");
+		System.out.println("[1] Teston Japanese");
+		System.out.println("[2] Teston Korean");
+		System.out.println("[3] Teston Russian");
+		System.out.println("[4] Teston Arabic");
+		System.out.println("[5] Teston Greek");
+		System.out.println("[6] View test");
+		System.out.println("[7] STARTTEST");
+		System.out.println("[8] View results");
+		System.out.println("[9] [option] TransliterationOn");
+		System.out.println("[10] [option] LongVerions");
+		System.out.println("[11] EXIT");
+		System.out.println("======================");
+	}
+	public int fProcess() {
+		int nAnswer;
+		Scanner input = new Scanner(System.in);
+		
+		nAnswer=input.nextInt();
+		
+		return nAnswer;
+	}
+}

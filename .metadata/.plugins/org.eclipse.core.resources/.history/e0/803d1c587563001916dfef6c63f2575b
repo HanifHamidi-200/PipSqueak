@@ -1,0 +1,90 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class apples {
+	public static void main(String [] args) {
+		Scanner input = new Scanner(System.in);
+		Random rnd1=new Random();
+		tuna myname = new tuna("Hanif");
+		column col1 =  new column("A",1);
+		column col2 =  new column("A",1);
+		column col3 =  new column("A",1);
+		column col4 =  new column("A",1);
+		int nLetter;
+		String sLetter;
+		
+		myname.Saying();
+		for(int i=1;i<=10;i++) {
+			nLetter=rnd1.nextInt(4);
+			switch(nLetter) {
+			case 1:
+				sLetter="A";
+				break;
+			case 2:
+				sLetter="B";
+				break;
+			case 3:
+				sLetter="C";
+				break;
+			default:
+				sLetter="D";
+				break;
+			}
+			col1.setLetter(sLetter,i);
+		}
+		for(int i=1;i<=10;i++) {
+			nLetter=rnd1.nextInt(4);
+			switch(nLetter) {
+			case 1:
+				sLetter="A";
+				break;
+			case 2:
+				sLetter="B";
+				break;
+			case 3:
+				sLetter="C";
+				break;
+			default:
+				sLetter="D";
+				break;
+			}
+			col2.setLetter(sLetter,i);
+		}
+		for(int i=1;i<=10;i++) {
+			nLetter=rnd1.nextInt(4);
+			switch(nLetter) {
+			case 1:
+				sLetter="A";
+				break;
+			case 2:
+				sLetter="B";
+				break;
+			case 3:
+				sLetter="C";
+				break;
+			default:
+				sLetter="D";
+				break;
+			}
+			col3.setLetter(sLetter,i);
+		}
+		for(int i=1;i<=10;i++) {
+			nLetter=rnd1.nextInt(4);
+			switch(nLetter) {
+			case 1:
+				sLetter="A";
+				break;
+			case 2:
+				sLetter="B";
+				break;
+			case 3:
+				sLetter="C";
+				break;
+			default:
+				sLetter="D";
+				break;
+			}
+			col4.setLetter(sLetter,i);
+		}
+	}
+}
