@@ -15,6 +15,7 @@ public class startTest {
 	private boolean _TransliterationOn = false;
 	private boolean _LongVersion = false;
 	private int numbers[] = new int[10];
+	private boolean correct[] = new boolean[10];
 	private boolean usefirst[] = new boolean[10];
 	private int nTestNumber=1;
 	private int nTestType=1;
@@ -22,6 +23,9 @@ public class startTest {
 	
 	public startTest(String file_path) {
 		path = file_path;
+		for(int i=1;i<=10;i++) {
+			correct[i-1] = false;
+		}
 		fGetNumbers();
 	}
 
@@ -101,6 +105,38 @@ public class startTest {
 		return nTestNumber;
 	}
 	
+	public void increaseTestnumber() {
+		boolean bFound=false;
+		nTestNumber++;
+		if(nTestNumber==11) {
+			nTestNumber=1;
+		}
+		if(correct[nTestNumber-1]) {
+			do {
+				nTestNumber++;
+				if(nTestNumber==11) {
+					nTestNumber=1;
+				}
+			}while (correct[nTestNumber-1]==false);
+		}
+	}
+		
+	void decreaseTestnumber() {
+		boolean bFound=false;
+		nTestNumber--;
+		if(nTestNumber==0) {
+			nTestNumber=10;
+		}
+		if(correct[nTestNumber-1]) {
+			do {
+				nTestNumber--;
+				if(nTestNumber==0) {
+					nTestNumber=10;
+				}
+			}while (correct[nTestNumber-1]==false);
+		}
+	}
+
 	public void setTestType(int value) {
 		nTestType = value;
 	}
@@ -163,6 +199,7 @@ public class startTest {
 		tryAnswer = value.trim();
 		
 		if(tryAnswer.equals(realAnswer.trim())) {
+			correct[nTestNumber-1] = true;
 			return true;
 		}
 		else {
@@ -171,7 +208,7 @@ public class startTest {
 		}
 	}
 
-	public void fProcessAnswer() {
+	public boolean fProcessAnswer() {
 		
 		System.out.println("======================");
 		System.out.println("GIVE_ANSWER");
@@ -190,6 +227,8 @@ public class startTest {
 			System.out.println(realAnswer);
 			System.out.println("======================");						
 		}
+		
+		return bCorrect;
 	}
 	
 	private void fGetNumbers() {

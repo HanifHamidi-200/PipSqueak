@@ -191,11 +191,29 @@ public class HTable {
 					}
 					btest.setTestnumber(1);
 					btest.setTestType(nTestType);
-					btest.fDisplay();
-					nAnswer2=btest.fProcess();
-					if(nAnswer2==3) {
-						btest.fProcessAnswer();
-					}
+					boolean bFound2 = false;
+					boolean bCorrect;
+					do {
+						btest.fDisplay();
+						nAnswer2=btest.fProcess();
+						switch(nAnswer2) {
+						case 1:
+							btest.increaseTestnumber();
+							break;
+						case 2:
+							btest.decreaseTestnumber();
+							break;
+						case 3:
+							bCorrect = btest.fProcessAnswer();
+							if(bCorrect) {
+								btest.increaseTestnumber();
+							}
+							break;
+						default:
+							bFound2 = true;
+							break;
+						}
+					} while (bFound2==false);
 					break;
 				case 11:
 					result1.View();
