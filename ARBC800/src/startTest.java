@@ -12,19 +12,34 @@ public class startTest {
 	private String col1[] = new String[1000];
 	private String col2[] = new String[1000];
 	private String col3[] = new String[1000];
+	private String col4[] = new String[1000];
 	private boolean _TransliterationOn = false;
 	private boolean _LongVersion = false;
 	private int numbers[] = new int[10];
 	private boolean correct[] = new boolean[10];
 	private boolean usefirst[] = new boolean[10];
+	private int PipLength[] = new int[10];
 	private int nTestNumber=1;
 	private int nTestType=1;
 	private String tryAnswer, realAnswer;
+	private String _STRAT_;
+	private String _STRAT2_;
+	
+	public void setSTRAT(String value) {
+		_STRAT_ = value;
+	}
+
+	public void setSTRAT2(String value) {
+		_STRAT2_ = value;
+	}
 	
 	public startTest(String file_path) {
 		path = file_path;
 		for(int i=1;i<=10;i++) {
 			correct[i-1] = false;
+		}
+		for(int i=1;i<=10;i++) {
+			PipLength[i-1] = 0;
 		}
 		fGetNumbers();
 	}
@@ -80,6 +95,10 @@ public class startTest {
 		return col3[nPos-1];
 	}
 	
+	public String getCol4(int nPos) {
+		return col4[nPos-1];
+	}
+
 	public void setCol1(int nPos, String value) {
 		col1[nPos] = value;
 	}
@@ -90,6 +109,10 @@ public class startTest {
 	
 	public void setCol3(int nPos, String value) {
 		col3[nPos] = value;
+	}
+
+	public void setCol4(int nPos, String value) {
+		col4[nPos] = value;
 	}
 
 	public void setNumbers(int nPos, int value1, boolean value2) {
@@ -137,6 +160,20 @@ public class startTest {
 		}
 	}
 
+	public void fPipSqueak5() {
+		PipLength[nTestNumber-1] += 6;
+		if(PipLength[nTestNumber-1]>realAnswer.length()) {
+			PipLength[nTestNumber-1] = realAnswer.length();
+		}
+	}
+	
+	public void fPipSqueak1() {
+		PipLength[nTestNumber-1] += 2;
+		if(PipLength[nTestNumber-1]>realAnswer.length()) {
+			PipLength[nTestNumber-1] = realAnswer.length();
+		}
+	}
+
 	public void setTestType(int value) {
 		nTestType = value;
 	}
@@ -177,11 +214,17 @@ public class startTest {
 		System.out.println(sText);
 		sText = sTesttext1;
 		System.out.println(sText);
+		if(PipLength[nTestNumber-1]>0) {
+			sText = "PIPANSWER = " + realAnswer.substring(0,PipLength[nTestNumber-1]-1);
+			System.out.println(sText);
+		}
 		System.out.println("======================");
 		System.out.println("[1] NextQuestion");
 		System.out.println("[2] PreviousQuestion");
 		System.out.println("[3] AttemptAnswer");
-		System.out.println("[4] QuitTest/CheckScore");
+		System.out.println("[4] PipSqueak5");
+		System.out.println("[5] PipSqueak1");
+		System.out.println("[6] QuitTest/CheckScore");
 		System.out.println("======================");
 		
 	}
@@ -220,6 +263,24 @@ public class startTest {
 		boolean bCorrect = fTry(sAnswer);
 
 		if(bCorrect) {
+			boolean bMatch = false;
+			int i = 0;
+			int nPos = numbers[nTestNumber-1];
+			
+			System.out.printf("%s = %s = %s\n",nPos,nTestNumber,col4[nPos-1]);
+			String sLine = _STRAT_ + col4[nPos];
+			int l,s;
+			l=sLine.length();
+			s=3;
+	        sLine=sLine.substring(s, l);
+	        	
+	        do {
+				i++;
+				bMatch = a[i-1].equals(sLine.trim());
+			}while (!bMatch);
+			i++;
+			String sNew = _STRAT2_ + a[i-1];
+			col4[nPos] = sNew;
 			System.out.println("CORRECT!");
 			System.out.println("======================");			
 		}
@@ -233,7 +294,6 @@ public class startTest {
 	
 	private void fGetNumbers() {
 		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
-		boolean bDone=false;
 		  try{    
 	          FileInputStream fin=new FileInputStream(sFilename);    
 	     	  int r=0,l=0,s=0;    
@@ -249,7 +309,6 @@ public class startTest {
 	        	  l=sLine.length();
 	        	  s=5;
 	        	  sLine=sLine.substring(s, l);
-	        	      bDone=true;
 	        	  a[i-1]=sLine;
 	          }
 	          fin.close();    

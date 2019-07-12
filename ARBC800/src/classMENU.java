@@ -5,6 +5,10 @@ public class classMENU {
 	boolean _LongVersion = false;
 	int _TestType = 1;
 	
+	public classMENU(int value) {
+		_TestType = value;
+	}
+	
 	public boolean getTransliterationOn() {
 		return _TransliterationOn;
 	}

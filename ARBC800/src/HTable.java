@@ -9,15 +9,19 @@ public class HTable {
 		Scanner input = new Scanner(System.in);
 		Random rnd1=new Random();
 		storeName myname = new storeName("Hanif");
-		storeFile file1 =  new storeFile("data.txt");
-		storeResult result1 =  new storeResult(0,0);
-		classMENU mymenu =  new classMENU();
-		String a[]=new String[100];
-
-		int _mode=1;
+		classMENU mymenu = new classMENU(1);
+		String a[] = new String[100];
+		
+		int _mode = 1;
 		String file_name="C:/A_OldPowersourceServer/file"+_mode+".rtf";
+		String file_name2="C:/A_OldPowersourceServer/try"+_mode+".txt";
 		classBOARD myboard =  new classBOARD();
 		storeColumn column1 =  new storeColumn("A",1);
+			
+		classTRY mytry =  new classTRY(file_name2);
+		WriteFile mywrite = new WriteFile(file_name2);
+		String _STRAT_;
+		String _STRAT2_;
 			
 		generateTest atest =  new generateTest(file_name);
 		startTest btest =  new startTest(file_name);
@@ -27,9 +31,10 @@ public class HTable {
 
 		String _countshort="1";
 		String _countlong="1";
-		String col1[] = new String[100];
-		String col2[] = new String[100];
-		String col3[] = new String[100];
+		String col1[] = new String[1000];
+		String col2[] = new String[1000];
+		String col3[] = new String[1000];
+		String col4[] = new String[1000];
 		boolean _TransliterationOn = false;
 		boolean _LongVersion = false;
 		
@@ -75,14 +80,30 @@ public class HTable {
 			if(nAnswer<=7) {
 				_mode = nAnswer;
 				file_name="C:/A_OldPowersourceServer/file"+_mode+".rtf";
-				
+				file_name2="C:/A_OldPowersourceServer/try"+_mode+".txt";
+					
 				column1.fView("TEST"+_mode);
 				atest.fStart(file_name);
 				atest.setLongVersion(_LongVersion);
 				btest.fStart(file_name);
 				btest.setLongVersion(_LongVersion);
 				btest.setTransliterationOn(_TransliterationOn);
-					
+				mytry.setMode(_mode);
+				mytry.fStart(file_name2);
+				mytry.setTransliterationOn(_TransliterationOn);
+				mytry.setLongVersion(_LongVersion);
+				mytry.OpenFile();
+				_STRAT_ = mytry.getSTRAT();
+				_STRAT2_ = mytry.getSTRAT2();
+				mywrite.setMode(_mode);
+				mywrite.fStart(file_name2);
+				mywrite.setTransliterationOn(_TransliterationOn);
+				mywrite.setLongVersion(_LongVersion);
+				mywrite.setSTRAT(_STRAT_);
+				mywrite.setSTRAT2(_STRAT2_);
+				btest.setSTRAT(_STRAT_);
+				btest.setSTRAT2(_STRAT2_);
+						
 				try {
 					ReadFile file =  new ReadFile(file_name);
 					String[] aryLines;
@@ -97,6 +118,8 @@ public class HTable {
 					atest.setCount2(_countlong);
 					btest.setCount1(_countshort);
 					btest.setCount2(_countlong);
+					mywrite.setCount1(_countshort);
+					mywrite.setCount2(_countlong);
 					if(_LongVersion==false) {
 						_count = _countshort;
 					}
@@ -106,6 +129,16 @@ public class HTable {
 				
 					int i=1;
 					boolean bMatch=false;
+					do {
+						if(!bMatch) {
+							col4[i-1] = mytry.getCol4(i);	
+							}
+						i++;
+						bMatch = a[i-2].equals(_count);
+					} while (!bMatch);
+				
+					i=1;
+					bMatch=false;
 					do {
 						if(!bMatch) {
 							col1[i-1] = file.getCol1(i);	
@@ -140,6 +173,18 @@ public class HTable {
 						bMatch = a[i-2].equals(_count);
 					}while (!bMatch);
 					
+					i=2;
+					bMatch=false;
+					do {
+						if(!bMatch) {
+							col4[i+1] = mytry.getCol4(i);
+							System.out.printf("[%s] %s\n",i-1,col4[i+1]);
+							btest.setCol4(i-1,col4[i+1]);	
+						}
+						i++;
+						bMatch = a[i-3].equals(_count);
+					} while (!bMatch);
+			
 					atest.fRandom();
 					for(int j=1;j<=10;j++) {
 						numbers[j-1] = atest.getNumbers(j);
@@ -149,7 +194,6 @@ public class HTable {
 				catch(IOException e){
 					System.out.println(e.getMessage());
 				}
-				
 				
 			}
 			else {		
@@ -209,14 +253,55 @@ public class HTable {
 								btest.increaseTestnumber();
 							}
 							break;
+						case 4:
+							btest.fPipSqueak5();
+							break;
+						case 5:
+							btest.fPipSqueak1();
+							break;
 						default:
 							bFound2 = true;
 							break;
 						}
 					} while (bFound2==false);
+					_countshort = btest.getCount1();
+					_countlong = btest.getCount2();
+					if(_LongVersion==false) {
+						_count = _countshort;
+					}
+					else {
+						_count = _countlong;
+					}
+
+					i=1;
+					bMatch=false;
+					do {
+						if(!bMatch) {
+							col4[i-1] = btest.getCol4(i);	
+							mywrite.setCol4(i-1, col4[i-1]);
+						}
+						i++;
+						bMatch = a[i-2].equals(_count);
+					}while (!bMatch);
+					mywrite.fOpen();
 					break;
 				case 11:
-					result1.View();
+					mytry.setMode(_mode);
+					mytry.setTransliterationOn(_TransliterationOn);
+					mytry.setLongVersion(_LongVersion);
+					_countshort = mytry.getCount1();
+					_countlong = mytry.getCount2();
+					if(_LongVersion==false) {
+						System.out.println("SHORT");
+						_count = _countshort;
+					}
+					else {
+						System.out.println("LONG");
+						_count = _countlong;
+					}
+					mytry.OpenFile();
+					mytry.fView();
+					mytry.fDisplay();
 					break;
 				case 12:
 					if(_TransliterationOn==false) {

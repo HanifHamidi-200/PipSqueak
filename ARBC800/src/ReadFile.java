@@ -73,7 +73,7 @@ public class ReadFile {
 		int i=0;
 		boolean bMatch=false;
 		String sLine;
-
+		
 		sLine=textreader.readLine();
 		sLine=textreader.readLine();
 		sLine=textreader.readLine();
@@ -182,7 +182,6 @@ public class ReadFile {
 	String readLines(boolean bShort){
 	
 		String sFilename="C:/A_OldPowersourceServer/numbers2.txt";
-		boolean bDone=false;
 		  try{    
 	          FileInputStream fin=new FileInputStream(sFilename);    
 	     	  int r=0,l=0,s=0;    
@@ -190,7 +189,7 @@ public class ReadFile {
 	       	  while((r=fin.read())!=13){
 	       		 sLine=sLine+(char)r;  	        		  			
 	       	  }
-	          for(int i=1;i<=10;i++) {
+	          for(int i=1;i<=14;i++) {
 	        	  sLine=null;
 	        	  while((r=fin.read())!=13){
 	        		 sLine=sLine+(char)r;  	        		  			
@@ -198,7 +197,6 @@ public class ReadFile {
 	        	  l=sLine.length();
 	        	  s=5;
 	        	  sLine=sLine.substring(s, l);
-	        	      bDone=true;
 	        	  b[i-1]=sLine;
 	          }
 	          fin.close();    
@@ -214,7 +212,6 @@ public class ReadFile {
 	
 	private void fGetNumbers() {
 		String sFilename="C:/A_OldPowersourceServer/numbers.txt";
-		boolean bDone=false;
 		  try{    
 	          FileInputStream fin=new FileInputStream(sFilename);    
 	     	  int r=0,l=0,s=0;    
@@ -230,7 +227,6 @@ public class ReadFile {
 	        	  l=sLine.length();
 	        	  s=5;
 	        	  sLine=sLine.substring(s, l);
-	        	      bDone=true;
 	        	  a[i-1]=sLine;
 	          }
 	          fin.close();    
