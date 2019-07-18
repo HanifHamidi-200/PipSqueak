@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class classMENU {
 	private int _mode1, _mode2;
+	private boolean _senta, _sentb, _sentc;
+	private String llast;
 	
 	public void setMode1(int value) {
 		_mode1 = value;
@@ -63,6 +65,16 @@ public class classMENU {
 		}
 	}
 	
+	public void fSetSent(boolean value1, boolean value2, boolean value3) {
+		_senta = value1;
+		_sentb = value2;
+		_sentc = value3;
+	}
+	
+	public void fSetLlast(String value) {
+		llast = value;
+	}
+	
 	public void fDisplay() {
 		String sText;
 		
@@ -70,6 +82,19 @@ public class classMENU {
 		System.out.println("MainMenu");
 		System.out.println(getText1());
 		System.out.println(getText2());
+		System.out.println("======================");
+		if(_senta) {
+			System.out.println("[S1] 3dChess -> KingKnight_KingBishop");			
+		}
+		if(_sentb) {
+			System.out.println("[S2] GoldenRobot -> HorseTechnique");			
+		}
+		if(_sentc) {
+			System.out.println("[S3] MehengKuasa -> CSBBank");			
+		}
+		if(llast!=null) {
+			System.out.println("LLAST = " + llast);			
+		}
 		System.out.println("======================");
 		System.out.println("[1] ChangeMode");
 		System.out.println("[2] ChangeEquation");
