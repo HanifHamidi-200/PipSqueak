@@ -11,6 +11,10 @@ public class HTable {
 		
 		testStart test1 = new testStart();
 		testCorrection test2 = new testCorrection();
+		test7 _test7 = new test7();
+		test8 _test8 = new test8();
+		test9 _test9 = new test9();
+		test10 _test10 = new test10();
 			
 		boolean bFound = false;
 		int nAnswer;
@@ -58,6 +62,26 @@ public class HTable {
 				test2.fPrepareQuestions();
 				test2.fStart();
 				test2.fWronglist();
+				break;
+			case 7:
+				_test7.fReset();
+				_test7.fStart();
+				_test7.fWronglist();
+				break;
+			case 8:
+				_test8.fReset();
+				_test8.fStart();
+				_test8.fWronglist();
+				break;
+			case 9:
+				_test9.fReset();
+				_test9.fStart();
+				_test9.fWronglist();
+				break;
+			case 10:
+				_test10.fReset();
+				_test10.fStart();
+				_test10.fWronglist();
 				break;
 			default:
 				bFound = true;

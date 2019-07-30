@@ -21,11 +21,11 @@ public class testCorrection {
 	private int givenAnswer[] = new int[10];
 	private boolean correct[] = new boolean[10];
 	Random rnd1=new Random();
-	private String[] _wrongs = new String[12];
+	private String[] _wrongs = new String[10];
 
 	public void fReset() {
 		fVoidfill();
-		for(int i=1;i<=12;i++) {
+		for(int i=1;i<=10;i++) {
 			_wrongs[i-1] = null;
 		}
 	}

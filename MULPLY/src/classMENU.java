@@ -26,7 +26,11 @@ public class classMENU {
 		System.out.println("[4] TestDown");
 		System.out.println("[5] TestAcross");
 		System.out.println("[6] CorrectionInjection");
-		System.out.println("[7] EXIT");
+		System.out.println("[7] SteppedDiscussion");
+		System.out.println("[8] LongMultiplication");
+		System.out.println("[9] Addition");
+		System.out.println("[10] Subtraction");
+		System.out.println("[11] EXIT");
 		System.out.println("======================");
 	}
 	
